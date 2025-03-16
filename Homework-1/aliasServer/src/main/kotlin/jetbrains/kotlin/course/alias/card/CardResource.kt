@@ -1,9 +1,18 @@
 package jetbrains.kotlin.course.alias.card
 
 import alias.JsCard
+import jetbrains.kotlin.course.alias.util.Identifier
 import jetbrains.kotlin.course.alias.util.toJsCard
 import org.springframework.web.bind.annotation.*
 
+@JvmInline
+value class Word(val word: String)
+
+// Card data class
+data class Card(
+    val id: Identifier,
+    val words: List<Word>
+)
 @RestController
 @RequestMapping("/api/cards/")
 class CardResource(val service: CardService) {
@@ -15,3 +24,4 @@ class CardResource(val service: CardService) {
     @GetMapping("/amount")
     fun getCardsAmount(): Int = CardService.cardsAmount
 }
+
